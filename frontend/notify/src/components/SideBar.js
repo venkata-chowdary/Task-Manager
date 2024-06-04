@@ -10,7 +10,6 @@ function SideBar(props) {
     const [tasksData, settasksData] = useState([]);
     const [sortByRemainingDays, setSortByRemainingDays] = useState(false)
     const [reRenderState, setReRenderState] = useState(false)
-    const [searchTask,setSearchTask]=useState('')
 
     function sideBarToggle() {
         setToggle(!toggle);
@@ -28,7 +27,6 @@ function SideBar(props) {
     }, [props.reRenderSidebar]);
 
     useEffect(() => {
-        console.log('notified')
         notifyTask(tasksData)
     }, [reRenderState])
 
@@ -39,9 +37,9 @@ function SideBar(props) {
             const timeDifference = taskDate - currentDate;
             const remainingDays = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
             if (remainingDays === 1) {
-                // toast.warn(`Task Reminder: ${task.taskTitle}, You have 1 day left to complete your task`);
+                toast.warn(`Task Reminder: ${task.taskTitle}, You have 1 day left to complete your task`);
             } else if (remainingDays < 1) {
-                // toast.error(`${task.taskTitle} is overdue! Please complete it as soon as possible`);
+                toast.error(`${task.taskTitle} is overdue! Please complete it as soon as possible`);
             }
         });
     }
@@ -55,7 +53,6 @@ function SideBar(props) {
 
     function handleSearch(e){
         const query=e.target.value
-        // setSearchTask(taskTitle)
         axios.get('http://localhost:4000/searchtask',{params:{query}},{withCredentials:true})
         .then((res)=>{
             settasksData(res.data)

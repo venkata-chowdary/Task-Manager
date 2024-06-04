@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Task from './Task';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Container(props) {
+    
     const [taskTitle, setTaskName] = useState('');
     const [taskDescription, setDescription] = useState('');
     const [taskDate, setDate] = useState('');
@@ -63,7 +63,7 @@ function Container(props) {
 
     return (
         <div className="container">
-            <h1>Task Manager</h1>
+            <h1>{props.username}</h1>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -94,6 +94,7 @@ function Container(props) {
             </form>
 
             <div className='pending-tasks'>
+            <button onClick={()=>props.logout()}>Logout</button>
                 <button className="toggle-button" onClick={() => setToggle(!toggle)}>
                     <FontAwesomeIcon icon={faExclamationCircle} style={{ fontSize: 14 }} />
                     <h2>Pending Tasks</h2>

@@ -1,28 +1,30 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-
-
 const app = express();
+const cookieParser = require("cookie-parser");
 
+const authRoute = require("./Routes/AuthRoute");
 
+//Models
 const Task=require('./models/Task')
+
 
 const corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true,
     optionSuccessStatus: 200
 }
-
-
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/TaskNotifier', {
     useNewUrlParser: true
 })
 
+app.use("/", authRoute);
 
 app.post('/createtask',(req,res)=>{
     res.send('received')
