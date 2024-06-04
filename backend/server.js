@@ -26,12 +26,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/TaskNotifier', {
 
 app.post('/createtask',(req,res)=>{
     res.send('received')
-    const {taskTitle,taskDescription,taskDate}=req.body
+    const {taskTitle,taskDescription,taskDate,tags}=req.body
     
     const newTask=new Task({
         taskTitle:taskTitle,
         taskDescription:taskDescription,
-        taskDate:taskDate
+        taskDate:taskDate,
+        tags:tags,
     })
     newTask.save()
     .then(()=>console.log('task saved'))
@@ -63,6 +64,7 @@ app.get('/geteditdata/:id',(req,res)=>{
 app.post('/edittask/:id',(req,res)=>{
     const {id}=req.params
     const newData=req.body
+    
     Task.findByIdAndUpdate(id,newData,{new:true})
     .then((updatedTask)=>{
         res.status(200).json('task updated successfully')
@@ -81,19 +83,26 @@ app.post('/deletetask/:id',(req,res)=>{
     .catch((e)=>console.log(e))
 })
 
-app.get('/searchtask',(req,res)=>{
-    const {taskTitle}=req.query
+app.get('/searchtask', (req, res) => {
+    const { query } = req.query;
+    console.log(req.query)
 
-    Task.find({taskTitle:{ $regex:taskTitle, $options:'i'}})
+    Task.find({
+        $or: [
+            { taskTitle: { $regex: query, $options: 'i' } }, // Search by title
+            { tags: { $regex: query, $options: 'i' } }      // Search by tag
+        ]
+    })
     .then(tasks => {
-        console.log(tasks)
         res.json(tasks);
     })
     .catch(err => {
         console.error(err);
         res.status(500).json({ error: 'An error occurred while searching for tasks' });
     });
-})
+});
+
+
 app.listen(4000, () => {
     console.log(`Server on 4000`);
 });
