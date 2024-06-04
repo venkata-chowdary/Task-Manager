@@ -1,0 +1,138 @@
+.sidebar-container {
+    height: 100vh;
+    width: 330px;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.sidebar-container.closed {
+    transform: translateX(-100%);
+}
+
+.toggle-btn {
+    position: fixed;
+    top: 1rem;
+    left: 1.5rem;
+    background: none;
+    border: none;
+    padding: .5rem;
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 24px;
+    transition: 0.2s ease-in-out;
+    color: #106eea;
+}
+
+.toggle-btn.open {
+    transform: rotate(90deg);
+}
+
+.toggle-btn.closed {
+    transform: rotate(0deg);
+}
+
+.sidebar {
+    margin-top: 2rem;
+}
+
+.sidebar .task {
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 5px;
+    min-width: 220px;
+    width: 100%;
+    margin: 16px 0;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.task-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-task{
+    padding: 5px;
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 70%;
+}
+
+.search-task:focus{
+    outline: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.task h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.task p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.task .task-btns,
+.edit-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: flex-start;
+}
+
+.task-btns button,
+.edit-form button,
+.sidebar-header button {
+    padding: 4px 14px;
+    background-color: #106eea;
+    font-size: 14px;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.task-btns button:hover,
+.edit-btns button:hover,
+.sidebar-header button:hover {
+    background-color: #0a4fbd;
+    transition: 0.2s all ease-in-out;
+    cursor: pointer;
+}
+
+.task-btns button.delete-btn {
+    background-color: #ff0000;
+}
+
+.task-btns button.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+/**Edit task**/
+
+.edit-form input,
+.edit-form textarea {
+    font-size: 13px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 12px);
+}
+

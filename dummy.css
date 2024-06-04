@@ -1,0 +1,69 @@
+.sidebar{
+    width: 330px;
+    height: 100vh;
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+
+.sidebar .tasks{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+    height: 80vh;
+    padding: 0 10px ;
+}
+
+
+.sidebar .task{
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 220px;
+    width: 100%;
+}
+
+.task-desc{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.sidebar h1{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.task h2{
+    font-size: 18px;
+}
+
+.task p{
+    font-size: 14px;
+}
+
+.task .task-btns{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+    justify-content:flex-start;
+}
+
+.task-btns button{
+    padding: 4px 14px;
+    background-color: #106eea;
+    font-size: 14px;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.task-btns button:hover{
+    background-color: #3b8af2;
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+}
