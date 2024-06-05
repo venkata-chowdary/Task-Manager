@@ -15,32 +15,29 @@ const Home = () => {
 
     useEffect(() => {
         const verifyCookie = async () => {
-            if (!cookies.token) {
+            try {
+                if (!cookies.token) {
+                    navigate("/login");
+                }
+                const { data } = await axios.post(
+                    "http://localhost:4000",
+                    {},
+                    { withCredentials: true }
+                );
+                const { status, user } = data;
+                setUsername(user);
+                if (status) {
+                    navigate("/");
+                }
+            } catch (error) {
+                console.error(error);
+                toast.error("Error verifying token");
+                removeCookie("token");
                 navigate("/login");
             }
-            const { data } = await axios.post(
-                "http://localhost:4000",
-                {},
-                { withCredentials: true }
-            );
-            const { status, user } = data;
-            setUsername(user);
-            if(status){
-                navigate('/')
-                console.log(status)
-                return
-            }
-            removeCookie('token')
-            navigate('/login')
-            // return status
-            //     ? toast(`Hello ${user}`, {
-            //         position: "top-right",
-            //     })
-            //     : (removeCookie("token"), navigate("/login"));
         };
         verifyCookie();
     }, [cookies, navigate, removeCookie]);
-
 
     const Logout = () => {
         removeCookie("token");
