@@ -33,15 +33,14 @@ const Login = () => {
         try {
             const { data } = await axios.post(
                 "http://localhost:4000/login",
-                {
-                    ...inputValue,
-                },
+                { ...inputValue }
+                ,
                 { withCredentials: true }
             );
+            console.log(data)
             const { success, message } = data;
             if (success) {
                 handleSuccess(message);
-                console.log('navigated from login')
                 navigate("/");
 
                 // setTimeout(() => {
@@ -53,11 +52,11 @@ const Login = () => {
         } catch (error) {
             console.log(error);
         }
-        setInputValue({
-            ...inputValue,
-            email: "",
-            password: "",
-        });
+        // setInputValue({
+        //     ...inputValue,
+        //     email: "",
+        //     password: "",
+        // });
     };
 
     return (

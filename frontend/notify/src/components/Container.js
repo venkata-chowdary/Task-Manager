@@ -44,12 +44,12 @@ function Container(props) {
             axios.post('http://localhost:4000/createtask', newTask, { withCredentials: true })
                 .then((response) => {
                     if (response.status === 200) {
+                        props.setreRenderSidebar(prev => !prev);
                         toast.success('Task created successfully!');
                         setTaskName('');
                         setDescription('');
                         setDate('');
                         setTags('');
-                        props.setreRenderSidebar(prev => !prev);
                     }
                 })
                 .catch((err) => {

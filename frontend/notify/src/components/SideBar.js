@@ -6,6 +6,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 
 function SideBar(props) {
+    console.log(props.reRenderSidebar)
     const [toggle, setToggle] = useState(false);
     const [tasksData, settasksData] = useState([]);
     const [sortByRemainingDays, setSortByRemainingDays] = useState(false)
@@ -51,13 +52,13 @@ function SideBar(props) {
         return sortByRemainingDays ? remainingDaysA - remainingDaysB : 0;
     });
 
-    function handleSearch(e){
-        const query=e.target.value
-        axios.get('http://localhost:4000/searchtask',{params:{query}},{withCredentials:true})
-        .then((res)=>{
-            settasksData(res.data)
-        })
-        .catch((err)=>console.log(err))
+    function handleSearch(e) {
+        const query = e.target.value
+        axios.post('http://localhost:4000/searchtask', { params: { query } }, { withCredentials: true })
+            .then((res) => {
+                settasksData(res.data)
+            })
+            .catch((err) => console.log(err))
     }
 
     return (
@@ -69,7 +70,7 @@ function SideBar(props) {
                 {toggle && (
                     <div className="sidebar">
                         <div className="sidebar-header">
-                            <input type="text" placeholder="Search Task" className="search-task" onChange={handleSearch}/>
+                            <input type="text" placeholder="Search Task" className="search-task" onChange={handleSearch} />
                             <button onClick={() => setSortByRemainingDays(!sortByRemainingDays)}>
                                 {sortByRemainingDays ? (<FontAwesomeIcon icon={faSort} />
                                 ) : (<>

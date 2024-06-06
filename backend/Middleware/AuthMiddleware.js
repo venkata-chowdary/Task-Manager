@@ -1,8 +1,9 @@
 const User = require("../Models/UserModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const cookieParser = require('cookie-parser');
 
-module.exports.userVerification = (req, res) => {
+function userVerification(req, res) {
     const token = req.cookies.token
     if (!token) {
         return res.json({ status: false })
@@ -17,3 +18,20 @@ module.exports.userVerification = (req, res) => {
         }
     })
 }
+
+function isAuthenticated(req, res, next) {
+    const token = req.cookies.token
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorised' })
+    }
+    jwt.verify(token, 'chowdary', (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Unauthorised' })
+        }
+        else {
+            req.userId = decoded.id
+            next()
+        }
+    })
+}
+module.exports={ userVerification, isAuthenticated }

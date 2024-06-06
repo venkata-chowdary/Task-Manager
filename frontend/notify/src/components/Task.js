@@ -35,7 +35,7 @@ function Task(props) {
 
     function handleEdit() {
         setEdit(true);
-        axios.get(`http://localhost:4000/geteditdata/${props._id}`)
+        axios.post(`http://localhost:4000/geteditdata/${props._id}`,{},{withCredentials:true})
             .then((response) => {
                 seteditData({
                     taskTitle: response.data.taskTitle,
@@ -50,7 +50,6 @@ function Task(props) {
 
     function handleSave(e) {
         e.preventDefault();
-
         axios.post(`http://localhost:4000/edittask/${props._id}`, editData, { withCredentials: true })
             .then((response) => {
                 if (response.status === 200) {
@@ -67,7 +66,7 @@ function Task(props) {
     }
 
     function handleDelete() {
-        axios.post(`http://localhost:4000/deletetask/${props._id}`, { withCredentials: true })
+        axios.post(`http://localhost:4000/deletetask/${props._id}`,{},{ withCredentials: true })
             .then((response) => {
                 if (response.status === 200) {
                     props.setreRenderSidebar(prev => !prev);
@@ -85,7 +84,7 @@ function Task(props) {
         <div className="task">
             {isEdit ?
                 <form onSubmit={handleSave} className="edit-form">
-                    <div>
+                    <div className="edit">
                         <input
                             type="text"
                             placeholder="Task"
@@ -133,7 +132,7 @@ function Task(props) {
                     </div>
                     <div className="task-btns">
                         <button onClick={handleEdit} className="edit-btn">Edit</button>
-                        <div style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row', gap: 8 }}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row', gap: 14 }}>
                             <button onClick={handleDelete} className="delete-btn">Delete</button>
                             <p style={{ color: 'red', margin: 0 }}>{remainingDays} days left</p>
                         </div>
