@@ -1,0 +1,22 @@
+.profile{
+    padding: 3rem;
+}
+
+.user-details{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.profile-tasks{
+    display: flex;
+    justify-content: flex-start;
+    margin-top:1rem;
+    flex-wrap: wrap;
+    gap: 4%;
+}
+.profile-tasks .task{
+    min-width: 280px;
+    width: 280px;
+}

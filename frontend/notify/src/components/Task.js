@@ -10,7 +10,7 @@ function Task(props) {
     const remainingDays = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
     const [isEdit, setEdit] = useState(false);
 
-    const tagsList=props.tags[0].split(' ').map(tag=>tag.trim())
+    const tagsList = props.tags[0].split(' ').map(tag => tag.trim())
 
     const [editData, seteditData] = useState({
         taskTitle: '',
@@ -35,7 +35,7 @@ function Task(props) {
 
     function handleEdit() {
         setEdit(true);
-        axios.post(`http://localhost:4000/geteditdata/${props._id}`,{},{withCredentials:true})
+        axios.post(`http://localhost:4000/geteditdata/${props._id}`, {}, { withCredentials: true })
             .then((response) => {
                 seteditData({
                     taskTitle: response.data.taskTitle,
@@ -66,7 +66,7 @@ function Task(props) {
     }
 
     function handleDelete() {
-        axios.post(`http://localhost:4000/deletetask/${props._id}`,{},{ withCredentials: true })
+        axios.post(`http://localhost:4000/deletetask/${props._id}`, {}, { withCredentials: true })
             .then((response) => {
                 if (response.status === 200) {
                     props.setreRenderSidebar(prev => !prev);
@@ -85,43 +85,25 @@ function Task(props) {
             {isEdit ?
                 <form onSubmit={handleSave} className="edit-form">
                     <div className="edit">
-                        <input
-                            type="text"
-                            placeholder="Task"
-                            className="task-input"
-                            name="taskTitle"
-                            value={editData.taskTitle}
-                            onChange={handleChange}
-                        />
-                        <textarea
-                            rows={2}
-                            className="description"
-                            placeholder="Description"
-                            name="taskDescription"
-                            value={editData.taskDescription}
-                            onChange={handleChange}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Tags (comma separated)"
-                            className="task-input"
-                            name="tags"
-                            value={editData.tags}
-                            onChange={handleTagChange}
-                        />
+                        <input type="text" placeholder="Task" className="task-input" name="taskTitle" value={editData.taskTitle} onChange={handleChange} />
+                        <textarea rows={2} className="description" placeholder="Description" name="taskDescription" value={editData.taskDescription} onChange={handleChange} />
+                        <input type="text" placeholder="Tags (comma separated)" className="task-input" name="tags" value={editData.tags} onChange={handleTagChange} />
                     </div>
-
                     <div className="edit-btns">
                         <button type="submit">Save</button>
-                        <button type="button" onClick={() => setEdit(false)}>Cancel</button>
+                        <button type="button" onClick={() => setEdit(false)} className="cancel-btn">Cancel</button>
                     </div>
                 </form>
                 :
-
                 <div>
                     <div className="task-desc">
                         <h2>{props.taskTitle}</h2>
-                        <p>{props.taskDescription.slice(0,26)}...</p>
+                        {props.limitedDesc ?
+                            <p>{props.taskDescription.slice(0, 24)}...</p>
+                            :
+                            <p>{props.taskDescription}</p>
+
+                        }
                         {props.tags && props.tags.length > 0 && (
                             <div className="tags">
                                 {tagsList.map((tag, index) => (

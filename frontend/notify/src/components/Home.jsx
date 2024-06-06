@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -6,12 +6,16 @@ import "react-toastify/dist/ReactToastify.css";
 import SideBar from "./SideBar";
 import Container from "./Container";
 import { ToastContainer, toast } from "react-toastify";
+import NavBar from "./NavBar";
+import { UserContext } from "../Context/UserContext";
 
 const Home = () => {
     const navigate = useNavigate();
     const [cookies, removeCookie] = useCookies([]);
     const [username, setUsername] = useState("");
     const [reRenderSidebar, setreRenderSidebar] = useState(false);
+    const {userDetails,setUserDetails}=useContext(UserContext)
+
 
     useEffect(() => {
         const verifyCookie = async () => {
@@ -25,7 +29,9 @@ const Home = () => {
                     { withCredentials: true }
                 );
                 const { status, user } = data;
-                setUsername(user);
+                setUsername(user.username);
+                setUserDetails(user)
+                console.log('User details:',user.password)
                 if (status) {
                     navigate("/");
                 }
@@ -41,11 +47,13 @@ const Home = () => {
 
     const Logout = () => {
         removeCookie("token");
+        setUserDetails(null)
         navigate("/login");
     };
 
     return (
         <div className="app">
+            <NavBar/>
             <SideBar reRenderSidebar={reRenderSidebar} setreRenderSidebar={setreRenderSidebar} />
             <Container logout={Logout} setreRenderSidebar={setreRenderSidebar} username={username} />
         </div>

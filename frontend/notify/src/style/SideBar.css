@@ -42,7 +42,7 @@
     margin-top: 2rem;
 }
 
-.sidebar .task {
+.task {
     border: 1px solid #ccc;
     background-color: #ffffff;
     padding: 1rem;
@@ -60,7 +60,7 @@
     margin-bottom: 12px;
 }
 
-.search-task{
+.search-task {
     padding: 5px;
     margin-bottom: 0;
     border: 1px solid #ccc;
@@ -68,7 +68,7 @@
     width: 70%;
 }
 
-.search-task:focus{
+.search-task:focus {
     outline: 0;
 }
 
@@ -90,17 +90,18 @@
     font-size: 14px;
 }
 
-.task .tag{
+.task .tag {
     font-size: 12px;
-    padding:0;
+    padding: 0;
     border: 1px solid #ccc;
     padding: 2px 6px;
     border-radius: 4px;
 }
 
-.tags{
+.tags {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 10px;
     flex-direction: row;
 }
@@ -114,38 +115,52 @@
 }
 
 .task-btns button,
+.edit-btn,
 .edit-form button,
 .sidebar-header button {
-    padding: 4px 14px;
+    padding: 6px;
     background-color: #106eea;
     font-size: 14px;
     border: 0;
     color: #fff;
     border-radius: 4px;
+    cursor: pointer;
 }
 
-.edit-btns button{
+
+.sidebar-header button, .edit-btn {
+    padding: 6px 14px;
+}
+
+.task-btns button {
+    padding: 6px 14px;
+}
+
+.edit-btns button {
     width: 80px;
 }
 
 .task-btns button:hover,
 .edit-btns button:hover,
-.sidebar-header button:hover {
+.sidebar-header button:hover,
+.edit-btn:hover {
     background-color: #0a4fbd;
     transition: 0.2s all ease-in-out;
     cursor: pointer;
 }
 
-.task-btns button.delete-btn {
+.task-btns .delete-btn,
+.edit-btns .cancel-btn {
     background-color: #ff0000;
 }
 
-.task-btns button.delete-btn:hover {
+.task-btns .delete-btn:hover,
+.edit-btns .cancel-btn:hover {
     background-color: #cc0000;
 }
 
 /**Edit task**/
-.edit-form div:first-child{
+.edit-form div:first-child {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -161,4 +176,3 @@
     width: calc(100% - 12px);
     width: 100%;
 }
-

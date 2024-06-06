@@ -71,15 +71,17 @@ function SideBar(props) {
                     <div className="sidebar">
                         <div className="sidebar-header">
                             <input type="text" placeholder="Search Task" className="search-task" onChange={handleSearch} />
-                            <button onClick={() => setSortByRemainingDays(!sortByRemainingDays)}>
+                            <button onClick={() => setSortByRemainingDays(!sortByRemainingDays)} className="sort-btn">
                                 {sortByRemainingDays ? (<FontAwesomeIcon icon={faSort} />
                                 ) : (<>
                                     <FontAwesomeIcon icon={faSort} />
                                 </>)}
                             </button>
                         </div>
+
+                        
                         {sortedTasksData.map((task) => (
-                            <Task {...task} key={task._id} setreRenderSidebar={props.setreRenderSidebar} />
+                            <Task {...task} key={task._id} setreRenderSidebar={props.setreRenderSidebar} limitedDesc={true}/>
                         ))}
                     </div>
                 )}
