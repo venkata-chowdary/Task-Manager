@@ -41,12 +41,12 @@ function Profile() {
 
     return (
         <div className="profile">
-            <h2>Profile</h2>
+            <h2 style={{marginBottom:48}}>Profile</h2>
             {isEdit ? (
-                <form className="edit-form profile-edit">
+                <form className="edit-form profile-edit-form profile-child">
                     <div className="edit">
                         <input type="text" value={newUsername} className="task-input" onChange={(e) => setNewUsername(e.target.value)} />
-                        <input type="email" value={newEmail} className="tasak-input" onChange={(e) => setNewEmail(e.target.value)} />
+                        <input type="email" value={newEmail} className="task-input" onChange={(e) => setNewEmail(e.target.value)} />
                     </div>
                     <div className="edit-btns">
                         <button onClick={handleSave}>Save</button>
@@ -55,7 +55,7 @@ function Profile() {
 
                 </form>
             ) : (
-                <div className="user-details">
+                <div className="user-details profile-child">
                     <div>
                         <p>{userDetails.username}</p>
                         <p>{userDetails.email}</p>

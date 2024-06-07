@@ -15,6 +15,7 @@ const Home = () => {
     const [username, setUsername] = useState("");
     const [reRenderSidebar, setreRenderSidebar] = useState(false);
     const {userDetails,setUserDetails}=useContext(UserContext)
+    const [toggleSideBar,setToggleSideBar]=useState(false)
 
 
     useEffect(() => {
@@ -53,8 +54,8 @@ const Home = () => {
 
     return (
         <div className="app">
-            <NavBar/>
-            <SideBar reRenderSidebar={reRenderSidebar} setreRenderSidebar={setreRenderSidebar} />
+            <NavBar toggleSideBar={toggleSideBar} setToggleSideBar={setToggleSideBar}/>
+            <SideBar reRenderSidebar={reRenderSidebar} setreRenderSidebar={setreRenderSidebar} toggleSideBar={toggleSideBar}/>
             <Container logout={Logout} setreRenderSidebar={setreRenderSidebar} username={username} />
         </div>
     );

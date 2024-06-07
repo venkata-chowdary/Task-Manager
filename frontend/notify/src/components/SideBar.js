@@ -6,15 +6,18 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 
 function SideBar(props) {
-    console.log(props.reRenderSidebar)
-    const [toggle, setToggle] = useState(false);
+    // console.log(props.reRenderSidebar)
+    // console.log(props.toggleSideBar)
+    
+    const toggle=props.toggleSideBar
+    // const [toggle, setToggle] = useState(false);
     const [tasksData, settasksData] = useState([]);
     const [sortByRemainingDays, setSortByRemainingDays] = useState(false)
     const [reRenderState, setReRenderState] = useState(false)
 
-    function sideBarToggle() {
-        setToggle(!toggle);
-    }
+    // function sideBarToggle() {
+    //     setToggle(!toggle);
+    // }
 
     useEffect(() => {
         axios.get('http://localhost:4000/gettasksdata', { withCredentials: true })
@@ -63,9 +66,9 @@ function SideBar(props) {
 
     return (
         <div>
-            <button onClick={sideBarToggle} className={`toggle-btn ${toggle ? 'open' : 'closed'}`}>
+            {/* <button onClick={sideBarToggle} className={`toggle-btn ${toggle ? 'open' : 'closed'}`}>
                 {toggle ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
-            </button>
+            </button> */}
             <div className={`sidebar-container ${toggle ? 'open' : 'closed'}`}>
                 {toggle && (
                     <div className="sidebar">

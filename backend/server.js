@@ -15,8 +15,10 @@ const { isAuthenticated } = require('./Middleware/AuthMiddleware')
 const corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true,
-    optionSuccessStatus: 200
+    optionSuccessStatus: 200,
+    
 }
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());

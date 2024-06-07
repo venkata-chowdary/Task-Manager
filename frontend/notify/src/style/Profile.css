@@ -16,7 +16,25 @@
     flex-wrap: wrap;
     gap: 4%;
 }
+
 .profile-tasks .task{
     min-width: 280px;
     width: 280px;
+}
+
+
+.profile-edit-form{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.profile-edit-form .edit-btns{
+    display: flex;
+    flex-direction: column;
+}
+.profile-edit-form .task-input{
+    width: 60%;
+    min-width: 200px;
 }

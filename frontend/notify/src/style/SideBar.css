@@ -2,7 +2,7 @@
     height: 100vh;
     width: 330px;
     background-color: #f9f9f9;
-    padding: 2rem;
+    padding: 4rem 2rem 2rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -14,28 +14,6 @@
 
 .sidebar-container.closed {
     transform: translateX(-100%);
-}
-
-.toggle-btn {
-    position: fixed;
-    top: 1rem;
-    left: 1.5rem;
-    background: none;
-    border: none;
-    padding: .5rem;
-    cursor: pointer;
-    z-index: 1001;
-    font-size: 24px;
-    transition: 0.2s ease-in-out;
-    color: #106eea;
-}
-
-.toggle-btn.open {
-    transform: rotate(90deg);
-}
-
-.toggle-btn.closed {
-    transform: rotate(0deg);
 }
 
 .sidebar {

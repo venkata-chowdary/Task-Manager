@@ -2,6 +2,7 @@ import './App.css'
 import './style/Container.css'
 import './style/SideBar.css'
 import './style/Profile.css'
+import './style/NavBar.css'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom'
 import Login from "./components/Login";
