@@ -1,23 +1,66 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faL, faTimes, faSort } from '@fortawesome/free-solid-svg-icons'
-const { Link } = require("react-router-dom");
+import React, { useEffect, useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faL, faTimes, faSort,faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { UserContext } from "../Context/UserContext"
+import { useContext } from 'react';
+import axios from 'axios';
+const { Link } = require("react-router-dom")
 
 function NavBar(props) {
+    const { userDetails } = useContext(UserContext)
+    const [tasksData, setTasksData] = useState([]);
+    const [toggle, setToggle] = useState(false);
+    const currentDate = new Date();
 
-    console.log(props)
-    function sideBarToggle(){
-        props.setToggleSideBar((toggle)=> !toggle)
+    useEffect(() => {
+        axios.get('http://localhost:4000/gettasksdata', { withCredentials: true })
+            .then((response) => {
+                const filtered = response.data.filter(task => new Date(task.taskDate) < currentDate);
+                setTasksData(filtered);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+
+    function sideBarToggle() {
+        props.setToggleSideBar((toggleSideBar) => !toggleSideBar)
     }
 
-    const toggle=props.toggleSideBar
+    const toggleSideBar = props.toggleSideBar
 
     return (
         <div className="navbar">
-            <button onClick={sideBarToggle} className={`toggle-btn ${toggle ? 'open' : 'closed'}`}>
-                {toggle ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
+            <button onClick={sideBarToggle} className={`toggle-btn ${toggleSideBar ? 'open' : 'closed'}`}>
+                {toggleSideBar ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
             </button>
-            <Link to='/profile'>Profile</Link>
+            <div>
+                <Link to='/profile'>Profile</Link>
+                <div className='pending-tasks'>
+                    <button className="toggle-button" onClick={() => setToggle(!toggle)}>
+                        {/* <FontAwesomeIcon icon={faExclamationCircle} style={{ fontSize: 14 }} /> */}
+                        <h2>Pending Tasks</h2>
+                    </button>
+                    <div className={`task-list ${toggle ? 'active' : ''}`}>
+                        {tasksData.length > 0 ? (
+                            <ul>
+                                {tasksData.map((task, index) => (
+                                    <li key={index}>
+                                        {task.taskTitle}
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No pending tasks</p>
+                        )}
+                    </div>
+                </div>
+                {useContext && <button className="logout-btn" onClick={() => props.logout()}>Logout</button>}
+
+            </div>
+
         </div>
 
     )

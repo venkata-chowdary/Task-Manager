@@ -15,7 +15,7 @@ module.exports.Signup = async (req, res, next) => {
 
         res.cookie("token", token, {
             withCredentials:true,
-            httpOnly: true, // Secure token cookie
+            httpOnly: true,
         });
         res.status(201).json({ message: "User signed in successfully", success: true, user });
     } catch (error) {
@@ -47,7 +47,7 @@ module.exports.Login = async (req, res, next) => {
             httpOnly: true,
         });
 
-        return res.status(200).json({ message: "User logged in successfully", success: true });
+        return res.status(200).json({ message: "User logged in successfully", success: true,user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server error" });

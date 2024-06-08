@@ -54,7 +54,7 @@ const Home = () => {
 
     return (
         <div className="app">
-            <NavBar toggleSideBar={toggleSideBar} setToggleSideBar={setToggleSideBar}/>
+            <NavBar logout={Logout} toggleSideBar={toggleSideBar} setToggleSideBar={setToggleSideBar}/>
             <SideBar reRenderSidebar={reRenderSidebar} setreRenderSidebar={setreRenderSidebar} toggleSideBar={toggleSideBar}/>
             <Container logout={Logout} setreRenderSidebar={setreRenderSidebar} username={username} />
         </div>

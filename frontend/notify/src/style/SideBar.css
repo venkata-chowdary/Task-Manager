@@ -95,7 +95,8 @@
 .task-btns button,
 .edit-btn,
 .edit-form button,
-.sidebar-header button {
+.sidebar-header button,
+.logout-btn {
     padding: 6px;
     background-color: #106eea;
     font-size: 14px;
@@ -106,7 +107,7 @@
 }
 
 
-.sidebar-header button, .edit-btn {
+.sidebar-header button, .edit-btn,.logout-btn {
     padding: 6px 14px;
 }
 
@@ -121,7 +122,8 @@
 .task-btns button:hover,
 .edit-btns button:hover,
 .sidebar-header button:hover,
-.edit-btn:hover {
+.edit-btn:hover,
+.logout-btn:hover {
     background-color: #0a4fbd;
     transition: 0.2s all ease-in-out;
     cursor: pointer;
@@ -136,6 +138,7 @@
 .edit-btns .cancel-btn:hover {
     background-color: #cc0000;
 }
+
 
 /**Edit task**/
 .edit-form div:first-child {

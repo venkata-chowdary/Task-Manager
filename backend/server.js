@@ -8,6 +8,7 @@ const authRoute = require("./Routes/AuthRoute");
 
 //Models
 const Task = require('./models/Task')
+const User = require('./Models/UserModel')
 
 //Middleware
 const { isAuthenticated } = require('./Middleware/AuthMiddleware')
@@ -16,7 +17,7 @@ const corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true,
     optionSuccessStatus: 200,
-    
+
 }
 
 app.use(cors(corsOptions));
@@ -83,7 +84,7 @@ app.post('/edittask/:id', (req, res) => {
 
 app.post('/deletetask/:id', (req, res) => {
     const id = req.params.id
-    console.log("Task Deleted:",id)
+    console.log("Task Deleted:", id)
     Task.findByIdAndDelete(id)
         .then((deletedTask) => {
             res.status(200).json('Task Deleted')
@@ -93,8 +94,12 @@ app.post('/deletetask/:id', (req, res) => {
 
 app.post('/searchtask', (req, res) => {
     const { query } = req.body.params;
-
+    const userId=req.userId
+    if (!userId) {
+        return res.status(401).json({ error: 'Unauthorized: No user ID provided' });
+    }
     Task.find({
+        userId: userId,
         $or: [
             { taskTitle: { $regex: query, $options: 'i' } }, // Search by title
             { tags: { $regex: query, $options: 'i' } }      // Search by tag
@@ -109,6 +114,23 @@ app.post('/searchtask', (req, res) => {
         });
 });
 
+app.post('/updateuser', (req, res) => {
+    const userId = req.userId
+    const { newUsername, newEmail } = req.body
+
+    User.findByIdAndUpdate(userId, { username: newUsername, email: newEmail }, { new: true, runValidators: true })
+        .then(updatedUser => {
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'User not found.' });
+            }
+            res.status(200).json(updatedUser);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'An error occurred while updating user details.' });
+        });
+
+})
 app.listen(4000, () => {
     console.log(`Server on 4000`);
 });

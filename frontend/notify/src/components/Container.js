@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Container(props) {
     
@@ -11,8 +9,8 @@ function Container(props) {
     const [taskDescription, setDescription] = useState('');
     const [taskDate, setDate] = useState('');
     const [tags, setTags] = useState('');
-    const [tasksData, setTasksData] = useState([]);
-    const [toggle, setToggle] = useState(false);
+    // const [tasksData, setTasksData] = useState([]);
+    // const [toggle, setToggle] = useState(false);
 
     const handleTaskNameChange = (e) => setTaskName(e.target.value);
     const handleDescriptionChange = (e) => setDescription(e.target.value);
@@ -20,17 +18,6 @@ function Container(props) {
     const handleTagsChange = (e) => setTags(e.target.value);
 
     const currentDate = new Date();
-
-    useEffect(() => {
-        axios.get('http://localhost:4000/gettasksdata', { withCredentials: true })
-            .then((response) => {
-                const filtered = response.data.filter(task => new Date(task.taskDate) < currentDate);
-                setTasksData(filtered);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -63,7 +50,7 @@ function Container(props) {
 
     return (
         <div className="container">
-            <h1>{props.username}</h1>
+            <h1>Task Manager</h1>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -92,29 +79,6 @@ function Container(props) {
                 />
                 <button type="submit">Add Task</button>
             </form>
-
-            <div className='pending-tasks'>
-            <button onClick={()=>props.logout()}>Logout</button>
-                <button className="toggle-button" onClick={() => setToggle(!toggle)}>
-                    <FontAwesomeIcon icon={faExclamationCircle} style={{ fontSize: 14 }} />
-                    <h2>Pending Tasks</h2>
-                </button>
-
-                <div className={`task-list ${toggle ? 'active' : ''}`}>
-                    {tasksData.length > 0 ? (
-                        <ul>
-                            {tasksData.map((task, index) => (
-                                <li key={index}>
-                                    {task.taskTitle}
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                            <p>No pending tasks</p>
-                        )}
-                </div>
-            </div>
-
             <ToastContainer />
         </div>
     );

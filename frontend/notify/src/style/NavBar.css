@@ -12,6 +12,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+
 .toggle-btn {
     background: none;
     border: none;
@@ -31,3 +32,92 @@
     transform: rotate(0deg);
 }
 
+a{
+    text-decoration: none;
+    font-weight: 500;
+    color: #106eea;
+}
+.navbar div{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+/**PENDING TASKS**/
+
+.pending-tasks {
+    border-radius: 8px; 
+    transition: all 0.3s ease; 
+    position: relative;
+}
+
+.pending-tasks button {
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    gap: 6px;
+    color: #106eea;
+    background-color: #fff;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    border-radius: 6px;
+    border: 2px solid #106eea;
+    width: 100%; 
+}
+
+.logout-btn{
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+}
+
+.pending-tasks button:hover,.logout-btn:hover {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    transform: translateY(2px);
+    cursor: pointer;
+    transition-delay: 0.1s;
+}
+
+.pending-tasks.active button {
+    border-radius: 0;
+}
+
+.pending-tasks h2 {
+    font-weight: 450;
+    font-size: 16px;
+}
+
+.task-list {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    border: 2px solid #106eea;
+    border-top: 0;
+    border-radius:0 0 6px 6px;
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 0.5rem;
+    border-radius:0 0 6px 6px;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.task-list.active {
+    transform: scaleY(1);
+}
+
+.task-list ul {
+    list-style-type: none;
+    text-align: left;
+    padding: 0 1rem;
+}
+
+.task-list li {
+    padding: 0 0 2px;
+    margin: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.task-list li:last-child {
+    border-bottom: none;
+}

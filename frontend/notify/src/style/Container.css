@@ -11,6 +11,7 @@
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 10px;
+    margin-top: 4rem;
 }
 
 .container h1 {
@@ -58,77 +59,4 @@ form button:hover {
     background-color: #0a4fbd;
     transition: 0.2s all ease-in-out;
     cursor: pointer;
-}
-
-/**PENDING TASKS**/
-
-.pending-tasks {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 250px;
-    border-radius: 8px; 
-    transition: all 0.3s ease; 
-}
-
-.pending-tasks button {
-    display: flex;
-    align-items: center;
-    padding: .5rem 1rem;
-    gap: 6px;
-    background-color: #fff;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-    border-radius: 6px 6px 0 0 ;
-    border: 1px solid #ddd;
-    width: 100%; 
-}
-
-.pending-tasks button:hover {
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
-    transform: translateY(2px);
-    cursor: pointer;
-    transition-delay: 0.1s;
-}
-
-.pending-tasks h2 {
-    font-weight: 450;
-    font-size: 16px;
-}
-
-.task-list {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-top: 0;
-    border-radius: 6px;
-    background-color: #fff;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
-    padding: 0.5rem;
-    border-radius: 0 0 6px 6px;
-    z-index: 1;
-    transform-origin: top;
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.task-list.active {
-    transform: scaleY(1);
-}
-
-.task-list ul {
-    list-style-type: none;
-    text-align: left;
-    padding: 0 1rem;
-}
-
-.task-list li {
-    padding: 0 0 2px;
-    margin: 6px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.task-list li:last-child {
-    border-bottom: none;
 }

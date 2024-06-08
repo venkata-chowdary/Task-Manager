@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { UserContext } from "../Context/UserContext";
 
 const Login = () => {
     const navigate = useNavigate();
+    const {setUserDetails}=useContext(UserContext)
     const [inputValue, setInputValue] = useState({
         email: "",
         password: "",
@@ -41,22 +43,21 @@ const Login = () => {
             const { success, message } = data;
             if (success) {
                 handleSuccess(message);
-                navigate("/");
-
-                // setTimeout(() => {
-                //     console.log('navigated')
-                // }, 1000);
+                setTimeout(() => {
+                    navigate("/");
+                }, 1000);
+                setUserDetails(data.user)
             } else {
                 handleError(message);
             }
         } catch (error) {
             console.log(error);
         }
-        // setInputValue({
-        //     ...inputValue,
-        //     email: "",
-        //     password: "",
-        // });
+        setInputValue({
+            ...inputValue,
+            email: "",
+            password: "",
+        });
     };
 
     return (

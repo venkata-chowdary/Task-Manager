@@ -90,7 +90,7 @@ function Task(props) {
                         <input type="text" placeholder="Tags (comma separated)" className="task-input" name="tags" value={editData.tags} onChange={handleTagChange} />
                     </div>
                     <div className="edit-btns">
-                        <button type="submit">Save</button>
+                        <button type="submit" className="save-btn">Save</button>
                         <button type="button" onClick={() => setEdit(false)} className="cancel-btn">Cancel</button>
                     </div>
                 </form>
