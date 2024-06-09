@@ -6,6 +6,7 @@ const TaskSchema=new mongoose.Schema({
     taskDescription:{type:String},
     taskDate:{type:Date,required:true},
     tags:{type:[String]},
+    completed:{type:Boolean},
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Add userId field
 
 })

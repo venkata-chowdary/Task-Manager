@@ -1,9 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const cron = require('node-cron');
+
 const app = express();
 const cookieParser = require("cookie-parser");
-
+const { sendRemainderEmail } = require('./Controllers/emailController');
 const authRoute = require("./Routes/AuthRoute");
 
 //Models
@@ -31,6 +33,52 @@ mongoose.connect('mongodb://127.0.0.1:27017/TaskNotifier', {
     useNewUrlParser: true
 })
 
+//Scheduling Reminders for overdued tasks
+cron.schedule('* 9 * * *', async () => {
+    console.log('Running scheduled task check at', new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+
+    const now = new Date();
+    const todayMidnight = new Date(now);
+    todayMidnight.setHours(0, 0, 0, 0);
+
+    const tomorrowMidnight = new Date(todayMidnight);
+    tomorrowMidnight.setDate(tomorrowMidnight.getDate() + 1);
+
+    const tasksDueTomorrow = await Task.find({
+        taskDate: {
+            $gte: tomorrowMidnight,
+            $lt: new Date(tomorrowMidnight.getTime() + 24 * 60 * 60 * 1000)
+        }
+    }).populate('userId');
+
+    const overdueTasks = await Task.find({
+        taskDate: {
+            $lt: todayMidnight
+        }
+    }).populate('userId');
+
+    tasksDueTomorrow.forEach(task => {
+        const { userId, taskTitle, taskDate } = task;
+        const { email } = userId;
+        const subject = 'Task Reminder: Due Tomorrow';
+        const text = `This is a reminder that your task "${taskTitle}" is due on ${taskDate.toDateString()}.`;
+        const html = `<p>This is a reminder that your <strong>task</strong> "${taskTitle}" is due on ${taskDate.toDateString()}.</p>`;
+
+        sendRemainderEmail(email, subject, text, html);
+    });
+
+    overdueTasks.forEach(task => {
+        const { userId, taskTitle, taskDate } = task;
+        const { email } = userId;
+        const subject = 'Task Reminder: Overdue Task';
+        const text = `This is a reminder that your task "${taskTitle}" was due on ${taskDate.toDateString()}. Please complete it as soon as possible.`;
+        const html = `<p>This is a reminder that your <strong>task</strong> "${taskTitle}" was due on ${taskDate.toDateString()}. Please complete it as soon as possible.</p>`;
+
+        sendRemainderEmail(email, subject, text, html);
+    });
+}, {
+    timezone: "Asia/Kolkata" // IST timezone
+});
 
 app.post('/createtask', (req, res) => {
     const { taskTitle, taskDescription, taskDate, tags } = req.body
@@ -48,6 +96,7 @@ app.post('/createtask', (req, res) => {
         })
         .catch((err) => console.log(err))
 })
+
 
 app.get('/gettasksdata', (req, res) => {
     const userId = req.userId
@@ -94,7 +143,7 @@ app.post('/deletetask/:id', (req, res) => {
 
 app.post('/searchtask', (req, res) => {
     const { query } = req.body.params;
-    const userId=req.userId
+    const userId = req.userId
     if (!userId) {
         return res.status(401).json({ error: 'Unauthorized: No user ID provided' });
     }
