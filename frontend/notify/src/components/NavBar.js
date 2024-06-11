@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faL, faTimes, faSort,faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faL, faTimes, faSort, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from "../Context/UserContext"
 import { useContext } from 'react';
 import axios from 'axios';
@@ -24,6 +24,8 @@ function NavBar(props) {
             });
     }, []);
 
+    console.log(userDetails)
+
 
     function sideBarToggle() {
         props.setToggleSideBar((toggleSideBar) => !toggleSideBar)
@@ -33,15 +35,22 @@ function NavBar(props) {
 
     return (
         <div className="navbar">
-            <button onClick={sideBarToggle} className={`toggle-btn ${toggleSideBar ? 'open' : 'closed'}`}>
-                {toggleSideBar ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
-            </button>
-            <div>
+            <div className='first'>
+                <button onClick={sideBarToggle} className={`toggle-btn ${toggleSideBar ? 'open' : 'closed'}`}>
+                    {toggleSideBar ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
+                </button>
+                <h2>
+                    Hello, {userDetails.username}
+                </h2>
+            </div>
+            <div className='second'>
                 <Link to='/profile'>Profile</Link>
                 <div className='pending-tasks'>
                     <button className="toggle-button" onClick={() => setToggle(!toggle)}>
                         {/* <FontAwesomeIcon icon={faExclamationCircle} style={{ fontSize: 14 }} /> */}
                         <h2>Pending Tasks</h2>
+                        <span className='pending-tasks-count'>{tasksData.length}</span>
+
                     </button>
                     <div className={`task-list ${toggle ? 'active' : ''}`}>
                         {tasksData.length > 0 ? (

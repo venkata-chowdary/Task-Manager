@@ -22,32 +22,31 @@
 
 .task {
     border: 1px solid #ccc;
+    border: 0;
     background-color: #ffffff;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     min-width: 220px;
     width: 100%;
-    margin: 16px 0;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .task-desc {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 1rem;
 }
 
 .search-task {
-    padding: 5px;
+    padding: 8px;
     margin-bottom: 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 70%;
+    font-size: 14px;
 }
 
 .search-task:focus {
-    outline: 0;
+    outline: none;
 }
 
 .sidebar-header {
@@ -61,33 +60,32 @@
 
 .task h2 {
     font-size: 18px;
-    line-height: 20px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
 }
 
 .task p {
     font-size: 14px;
+    margin-bottom: 1rem;
 }
 
-.task .tag {
+.tag {
     font-size: 12px;
-    padding: 0;
+    padding: 4px 8px;
     border: 1px solid #ccc;
-    padding: 2px 6px;
     border-radius: 4px;
+    margin-right: 6px;
+    margin-bottom: 6px;
 }
 
 .tags {
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 10px;
-    flex-direction: row;
 }
 
 .task .task-btns,
 .edit-btns {
     display: flex;
-    flex-direction: row;
     gap: 14px;
     justify-content: flex-start;
 }
@@ -97,15 +95,15 @@
 .edit-form button,
 .sidebar-header button,
 .logout-btn {
-    padding: 6px;
+    padding: 8px 16px;
     background-color: #106eea;
     font-size: 14px;
     border: 0;
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-
 
 .sidebar-header button, .edit-btn,.logout-btn {
     padding: 6px 14px;
@@ -146,14 +144,20 @@
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 6px;
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
 .edit-form input,
 .edit-form textarea {
-    font-size: 13px;
-    padding: 6px;
+    font-size: 14px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: calc(100% - 12px);
-    width: 100%;
+    width:100%;
+}
+
+.sidebar-container .save-btn,.sidebar-container .cancel-btn{
+    padding: 6px;
+
 }

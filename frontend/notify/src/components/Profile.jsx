@@ -57,12 +57,13 @@ function Profile() {
     return (
         <div className="profile">
             <div style={{ marginBottom: 48, display: "flex", alignItems: 'center', justifyContent: 'space-between' }}>
-                <h2>Profile</h2>
+                <h2 style={{fontSize:'2rem'}}>Profile</h2>
                 <Link to='/'>
                     <FontAwesomeIcon icon={faCaretLeft} />
                     Home
                 </Link>
             </div>
+
             {isEdit ? (
                 <form className="edit-form profile-edit-form profile-child">
                     <div className="edit">

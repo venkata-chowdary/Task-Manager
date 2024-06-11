@@ -66,7 +66,7 @@ const Signup = () => {
             <h2>Signup Account</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="email">Email</label>
+                    {/* <label htmlFor="email">Email</label> */}
                     <input
                         type="email"
                         name="email"
@@ -76,7 +76,7 @@ const Signup = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="email">Username</label>
+                    {/* <label htmlFor="email">Username</label> */}
                     <input
                         type="text"
                         name="username"
@@ -86,7 +86,7 @@ const Signup = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                    {/* <label htmlFor="password">Password</label> */}
                     <input
                         type="password"
                         name="password"

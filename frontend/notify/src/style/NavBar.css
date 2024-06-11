@@ -32,23 +32,40 @@
     transform: rotate(0deg);
 }
 
-a{
+.navbar h2 {
+    font-weight: 500;
+    font-size: 20px;
+    color: #333;
+}
+
+.navbar a {
     text-decoration: none;
     font-weight: 500;
     color: #106eea;
+    transition: color 0.3s ease;
 }
-.navbar div{
+
+.navbar a:hover {
+    color: #0a4fbd;
+}
+
+
+.navbar div.first {
     display: flex;
     align-items: center;
     gap: 2rem;
-    justify-content: space-between;
 }
+
+.navbar div.second {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
 
 /**PENDING TASKS**/
 
-.pending-tasks {
-    border-radius: 8px; 
-    transition: all 0.3s ease; 
+.pending-tasks { 
     position: relative;
 }
 
@@ -65,10 +82,7 @@ a{
     width: 100%; 
 }
 
-.logout-btn{
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
 
-}
 
 .pending-tasks button:hover,.logout-btn:hover {
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
@@ -95,8 +109,6 @@ a{
     border-radius:0 0 6px 6px;
     background-color: #fff;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
-    padding: 0.5rem;
-    border-radius:0 0 6px 6px;
     transform-origin: top;
     transform: scaleY(0);
     transition: transform 0.3s ease;
@@ -110,14 +122,38 @@ a{
     list-style-type: none;
     text-align: left;
     padding: 0 1rem;
+    width: 100%;
+
 }
 
 .task-list li {
-    padding: 0 0 2px;
-    margin: 6px 0;
+    padding: 8px 0;
     border-bottom: 1px solid #eee;
+    color: #333;
+
 }
 
 .task-list li:last-child {
     border-bottom: none;
+}
+
+.pending-tasks-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, -40%);
+    border-radius: 50%;
+    background-color: red;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.logout-btn{
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 }

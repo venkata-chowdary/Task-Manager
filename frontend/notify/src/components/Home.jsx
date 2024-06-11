@@ -49,6 +49,7 @@ const Home = () => {
     const Logout = () => {
         removeCookie("token");
         setUserDetails(null)
+        localStorage.removeItem("userDetails")
         navigate("/login");
     };
 
